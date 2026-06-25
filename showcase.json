@@ -1,0 +1,43 @@
+{
+  "projects": {
+    "project1": [
+      {
+        "username": "vladimirlopezstudent",
+        "name": "Vladimir Lopez",
+        "description": "Personal website showcasing interests and skills",
+        "enabled": true
+      },
+      {
+        "username": "pavangud",
+        "name": "Pavan",
+        "description": "Creative personal website with interactive elements",
+        "enabled": true
+      },
+      {
+        "username": "NIcolechen977",
+        "name": "Nicole Chen",
+        "description": "Personal website with portfolio and projects",
+        "enabled": true
+      },
+      {
+        "username": "audreyisprocoder",
+        "name": "Audrey",
+        "description": "Personal website with coding projects showcase",
+        "enabled": true
+      },
+      {
+        "username": "Mezu-Uwalaka",
+        "name": "Mezu Uwalaka",
+        "description": "Personal website highlighting interests",
+        "enabled": true
+      },
+      {
+        "username": "Bryan-6",
+        "name": "Bryan",
+        "description": "Personal website with creative design",
+        "enabled": true
+      }
+    ],
+    "project2": []
+  }
+}
