@@ -70,10 +70,10 @@
       {
         "username": "HanISmart",
         "name": "Han",
-        "description": "Brawl - Interactive game project",
+        "description": "Brawl - Multiplayer game with server backend",
         "enabled": true,
         "repo": "HanISmart/Brawl",
-        "pages_url": "https://hanismart.github.io/Brawl/"
+        "pages_url": "https://brawl-a3t9.onrender.com/"
       },
       {
         "username": "GTran21",
