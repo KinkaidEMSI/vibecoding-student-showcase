@@ -2,7 +2,7 @@
 
 ✨ **Live Site:** https://kinkaidemsi.github.io/vibecoding-student-showcase/
 
-This page automatically shows all VibeCoding student projects that have GitHub Pages enabled!
+This page automatically shows all VibeCoding student projects from the **Engineer, Math & Science Institute** at Kinkaid School that have GitHub Pages enabled!
 
 ---
 
@@ -31,14 +31,14 @@ This page automatically shows all VibeCoding student projects that have GitHub P
    - Click **Save**
    - Wait 1-2 minutes for your site to build
 
-4. **That's it!** Within a few hours, your project will automatically appear on the showcase page.
+4. **That's it!** Your project will automatically appear on the showcase page within a few hours.
 
 ### How It Works
 
 The showcase page runs an automatic script that:
-- Scans all student repositories in the KinkaidEMSI organization
+- Scans student repositories in **both** KinkaidEMSI and EMSI-Vibe-Coding organizations
 - Finds projects with GitHub Pages enabled
-- Displays them automatically
+- Displays them automatically with your proper name
 
 **You don't need to:**
 - Fork anything
@@ -52,12 +52,12 @@ The showcase page runs an automatic script that:
 
 ## 🛠️ For Instructors
 
-### Update the Showcase Manually
+### Update the Showcase
 
 When you want to refresh the showcase with the latest student projects:
 
 ```bash
-# Clone the repo
+# Clone the repo (first time only)
 git clone https://github.com/KinkaidEMSI/vibecoding-student-showcase.git
 cd vibecoding-student-showcase
 
@@ -71,34 +71,43 @@ git push
 ```
 
 The script automatically:
-- Fetches all student repos from the KinkaidEMSI org
+- Scans **KinkaidEMSI** and **EMSI-Vibe-Coding** organizations
+- Finds repos matching project patterns
 - Checks which ones have GitHub Pages enabled
+- Uses proper student names from `students.json`
 - Generates an updated index.html with all projects
 - Shows project counts and stats
 
+### Update Student Names
+
+Edit `students.json` to add or update student display names:
+
+```json
+{
+  "github-username": "Display Name",
+  "pavangud": "Pavan",
+  "NIcolechen977": "Nicole Chen"
+}
+```
+
 ### Customize Project Matching
 
-Edit `fetch-student-projects.py` and modify the `get_student_repos()` function to change:
-- Project name patterns (currently: `project-1-personal-website` and `project-2`)
-- Which repos to include/exclude
-- How student names are extracted from repo names
+Edit `fetch-student-projects.py` and modify the patterns in `get_student_repos()`:
 
-### Manual HTML Edits
+```python
+# Current patterns
+if project_num == 1:
+    patterns = ["project-1-personal-website", "project1"]
+else:
+    patterns = ["project-2", "project2", "interactive"]
+```
 
-If you need to manually add/edit a project, edit `index.html` directly. Find the appropriate section (`project1-grid` or `project2-grid`) and add:
+### Add/Remove Organizations
 
-```html
-<div class="project-card">
-    <h3>Student Name</h3>
-    <p class="student-name">@username</p>
-    <p class="project-description">
-        Brief project description.
-    </p>
-    <div class="project-links">
-        <a href="PAGES_URL" class="btn btn-primary" target="_blank">View Site</a>
-        <a href="REPO_URL" class="btn btn-secondary" target="_blank">Code</a>
-    </div>
-</div>
+Edit the `ORGS` list at the top of `fetch-student-projects.py`:
+
+```python
+ORGS = ['KinkaidEMSI', 'EMSI-Vibe-Coding', 'AnotherOrg']
 ```
 
 ---
@@ -108,7 +117,16 @@ If you need to manually add/edit a project, edit `index.html` directly. Find the
 - **Showcase:** https://kinkaidemsi.github.io/vibecoding-student-showcase/
 - **Course Materials:** https://kinkaidemsi.github.io/vibecoding-2026-materials/docs/
 - **Repository:** https://github.com/KinkaidEMSI/vibecoding-student-showcase
+- **Student Guide:** [STUDENT-GUIDE.md](STUDENT-GUIDE.md)
 
 ---
 
-Built with 💜 for VibeCoding 2026 at Kinkaid School
+## 🎓 Current Students
+
+The showcase automatically tracks projects from these students:
+
+Ajarkyn, Amelie, Andy, Audrey, Aurora, Bryan, Diego, Emika, Francisco, GS Blackthorn, G Tran, Han, Kangkang Wang, Mezu Uwalaka, Naima Beye, Najma, N Hammen, Nicole Chen, Pavan, Ram, Rebecca, Saloni, Sammy, Vladimir Lopez
+
+---
+
+Built with 💜 for VibeCoding 2026 at **Kinkaid School - Engineer, Math & Science Institute**

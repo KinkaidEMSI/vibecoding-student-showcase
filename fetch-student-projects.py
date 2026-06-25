@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """
 Automatically fetch and display student projects from GitHub Classroom repositories.
-This script scans the KinkaidEMSI organization for student project repositories
-and generates an updated showcase page.
+Scans both KinkaidEMSI and EMSI-Vibe-Coding organizations.
 """
 
 import json
 import subprocess
 import sys
 from typing import List, Dict
-import re
+from datetime import datetime
+
+# Organizations to scan
+ORGS = ['KinkaidEMSI', 'EMSI-Vibe-Coding']
 
 def run_gh_command(args: List[str]) -> str:
     """Run a gh CLI command and return the output."""
@@ -25,67 +27,93 @@ def run_gh_command(args: List[str]) -> str:
         print(f"Error running gh command: {e.stderr}", file=sys.stderr)
         return ""
 
-def get_student_repos(project_num: int) -> List[Dict[str, str]]:
-    """Fetch all student repositories for a specific project."""
+def load_student_names() -> Dict[str, str]:
+    """Load student name mappings from students.json."""
+    try:
+        with open('students.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+def get_student_display_name(username: str, student_names: Dict[str, str]) -> str:
+    """Get proper display name for a student."""
+    return student_names.get(username, username.replace('-', ' ').title())
+
+def get_student_repos(project_num: int, student_names: Dict[str, str]) -> List[Dict[str, str]]:
+    """Fetch all student repositories for a specific project from all orgs."""
     print(f"🔍 Fetching Project {project_num} repositories...")
     
     # Search patterns for both project types
     if project_num == 1:
-        pattern = "project-1-personal-website"
+        patterns = ["project-1-personal-website", "project1"]
     else:
-        pattern = "project-2"
+        patterns = ["project-2", "project2", "interactive"]
     
-    # Get all repos from the org
-    output = run_gh_command(['api', '/orgs/KinkaidEMSI/repos', '--paginate'])
-    if not output:
-        return []
-    
-    repos = json.loads(output)
     student_projects = []
+    seen_users = set()  # Track unique students
     
-    for repo in repos:
-        name = repo.get('name', '')
+    for org in ORGS:
+        print(f"   Scanning {org}...")
         
-        # Skip template/starter repos
-        if 'starter' in name.lower() or 'template' in name.lower():
+        # Get all repos from the org
+        output = run_gh_command(['api', f'/orgs/{org}/repos', '--paginate'])
+        if not output:
             continue
         
-        # Match project pattern
-        if pattern in name.lower():
-            # Extract student username from repo name
-            # Format: project-1-personal-website-USERNAME
-            parts = name.split('-')
-            if len(parts) >= 4:
-                username = parts[-1]
+        repos = json.loads(output)
+        
+        for repo in repos:
+            name = repo.get('name', '').lower()
+            repo_name = repo.get('name', '')
+            
+            # Skip template/starter repos
+            if any(skip in name for skip in ['starter', 'template', 'materials', 'setup-and-first-push']):
+                continue
+            
+            # Match project pattern
+            if any(pattern in name for pattern in patterns):
+                # Extract student username from repo name
+                parts = repo_name.split('-')
+                username = None
                 
-                # Check if GitHub Pages is enabled
-                pages_output = run_gh_command(['api', f'/repos/KinkaidEMSI/{name}/pages'])
-                has_pages = bool(pages_output and 'html_url' in pages_output)
-                
-                if has_pages:
-                    pages_data = json.loads(pages_output)
-                    pages_url = pages_data.get('html_url', '')
+                # Try to find username (last part of repo name)
+                if len(parts) >= 2:
+                    username = parts[-1]
                     
-                    student_projects.append({
-                        'name': username.replace('-', ' ').title(),
-                        'username': username,
-                        'repo_name': name,
-                        'repo_url': f"https://github.com/KinkaidEMSI/{name}",
-                        'pages_url': pages_url,
-                        'description': f"A creative {'website' if project_num == 1 else 'interactive app'} by {username}"
-                    })
-                    print(f"  ✓ Found: {username}")
+                    # Skip if we've already added this student
+                    if username in seen_users:
+                        continue
+                    
+                    # Check if GitHub Pages is enabled
+                    pages_output = run_gh_command(['api', f'/repos/{org}/{repo_name}/pages'])
+                    has_pages = bool(pages_output and 'html_url' in pages_output)
+                    
+                    if has_pages:
+                        pages_data = json.loads(pages_output)
+                        pages_url = pages_data.get('html_url', '')
+                        display_name = get_student_display_name(username, student_names)
+                        
+                        student_projects.append({
+                            'name': display_name,
+                            'username': username,
+                            'repo_name': repo_name,
+                            'repo_url': f"https://github.com/{org}/{repo_name}",
+                            'pages_url': pages_url,
+                            'description': f"{'Personal website' if project_num == 1 else 'Interactive app'} by {display_name}"
+                        })
+                        
+                        seen_users.add(username)
+                        print(f"  ✓ Found: {display_name} (@{username})")
     
     print(f"✅ Found {len(student_projects)} projects with GitHub Pages enabled\n")
-    return student_projects
+    return sorted(student_projects, key=lambda x: x['name'])
 
 def generate_project_cards(projects: List[Dict[str, str]], project_num: int) -> str:
     """Generate HTML for project cards."""
     cards_html = []
     
     for project in projects:
-        card_html = f"""
-                <div class="project-card">
+        card_html = f"""                <div class="project-card">
                     <h3>{project['name']}</h3>
                     <p class="student-name">@{project['username']}</p>
                     <p class="project-description">
@@ -99,8 +127,7 @@ def generate_project_cards(projects: List[Dict[str, str]], project_num: int) -> 
         cards_html.append(card_html)
     
     # Add "add your project" card
-    cards_html.append("""
-                <div class="project-card add-project-card">
+    cards_html.append("""                <div class="project-card add-project-card">
                     <div class="add-icon">+</div>
                     <p>Add Your Project</p>
                     <p class="add-instructions">Enable GitHub Pages on your repo!</p>
@@ -108,7 +135,7 @@ def generate_project_cards(projects: List[Dict[str, str]], project_num: int) -> 
     
     return "\n".join(cards_html)
 
-def generate_html(project1_cards: str, project2_cards: str) -> str:
+def generate_html(project1_cards: str, project2_cards: str, update_time: str) -> str:
     """Generate the complete HTML file."""
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -117,7 +144,7 @@ def generate_html(project1_cards: str, project2_cards: str) -> str:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VibeCoding 2026 - Student Projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {{
             --gold: #FFC61E;
@@ -215,6 +242,7 @@ def generate_html(project1_cards: str, project2_cards: str) -> str:
             gap: 3rem;
             justify-content: center;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }}
 
         .stat {{
@@ -447,6 +475,7 @@ def generate_html(project1_cards: str, project2_cards: str) -> str:
     <div class="hero">
         <h1><span class="emoji">🎨</span> Student Project Showcase</h1>
         <p>Amazing work from VibeCoding 2026 students at Kinkaid School</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.6;">Engineer, Math & Science Institute</p>
         <div class="hero-stats">
             <div class="stat">
                 <div class="stat-num" id="project1-count">0</div>
@@ -487,9 +516,10 @@ def generate_html(project1_cards: str, project2_cards: str) -> str:
     <!-- Footer -->
     <footer>
         <p><strong>VibeCoding 2026</strong> | Kinkaid School</p>
+        <p>Engineer, Math & Science Institute</p>
         <p><a href="https://kinkaidemsi.github.io/vibecoding-2026-materials/docs/">View Course Materials</a></p>
         <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
-            Last updated: <span id="update-time">{{UPDATE_TIME}}</span>
+            Last updated: {update_time}
         </p>
     </footer>
 
@@ -504,7 +534,7 @@ def generate_html(project1_cards: str, project2_cards: str) -> str:
         // Add project card click handler
         document.querySelectorAll('.add-project-card').forEach(card => {{
             card.addEventListener('click', () => {{
-                window.open('https://github.com/KinkaidEMSI/vibecoding-student-showcase#-how-to-add-your-project', '_blank');
+                window.open('https://github.com/KinkaidEMSI/vibecoding-student-showcase/blob/main/STUDENT-GUIDE.md', '_blank');
             }});
         }});
     </script>
@@ -513,11 +543,16 @@ def generate_html(project1_cards: str, project2_cards: str) -> str:
 
 def main():
     """Main function to generate the showcase page."""
-    print("🚀 VibeCoding Student Showcase Generator\n")
+    print("🚀 VibeCoding Student Showcase Generator")
+    print(f"📚 Scanning organizations: {', '.join(ORGS)}\n")
+    
+    # Load student names
+    student_names = load_student_names()
+    print(f"📋 Loaded {len(student_names)} student names\n")
     
     # Fetch projects
-    project1_repos = get_student_repos(1)
-    project2_repos = get_student_repos(2)
+    project1_repos = get_student_repos(1, student_names)
+    project2_repos = get_student_repos(2, student_names)
     
     # Generate HTML cards
     print("📝 Generating HTML...")
@@ -525,12 +560,10 @@ def main():
     project2_cards = generate_project_cards(project2_repos, 2)
     
     # Get current timestamp
-    from datetime import datetime
     update_time = datetime.now().strftime("%B %d, %Y at %I:%M %p")
     
     # Generate complete HTML
-    html_content = generate_html(project1_cards, project2_cards)
-    html_content = html_content.replace('{update_time}', update_time)
+    html_content = generate_html(project1_cards, project2_cards, update_time)
     
     # Write to file
     with open('index.html', 'w', encoding='utf-8') as f:
