@@ -1,95 +1,114 @@
 # VibeCoding 2026 - Student Project Showcase
 
-This repository showcases student projects from the VibeCoding 2026 course at Kinkaid School.
+✨ **Live Site:** https://kinkaidemsi.github.io/vibecoding-student-showcase/
 
-## 🌐 View the Showcase
-Visit: **https://kinkaidemsi.github.io/vibecoding-student-showcase/**
+This page automatically shows all VibeCoding student projects that have GitHub Pages enabled!
 
-## 📚 Course Materials
-[VibeCoding 2026 Course Materials](https://kinkaidemsi.github.io/vibecoding-2026-materials/docs/)
+---
 
-## 🎯 Projects
+## 🎯 For Students: How to Get Your Project on the Showcase
 
-### Project 1: Personal Website
-Students create their own personal websites to showcase their interests, skills, and projects.
+### The Simple Version
 
-### Project 2: Interactive App
-Students build interactive web applications with creative features and animations.
+**Your project will automatically appear on the showcase once you enable GitHub Pages.** That's it!
 
-## ➕ How to Add Your Project
+### Step-by-Step:
 
-### Option 1: Submit via Pull Request (Recommended)
+1. **Finish your project** and make sure it's working in your Codespace
 
-1. **Fork this repository**
-2. **Clone your fork**
+2. **Push your code to GitHub**
    ```bash
-   git clone https://github.com/YOUR-USERNAME/vibecoding-student-showcase.git
-   cd vibecoding-student-showcase
+   git add .
+   git commit -m "Final version"
+   git push
    ```
 
-3. **Edit `index.html`** - Add your project card:
-   
-   For **Project 1** (Personal Website), add this inside `<div class="projects-grid" id="project1-grid">`:
-   ```html
-   <div class="project-card">
-       <h3>Your Name</h3>
-       <p class="student-name">@your-github-username</p>
-       <p class="project-description">
-           Brief description of your personal website (1-2 sentences).
-       </p>
-       <div class="project-links">
-           <a href="https://your-username.github.io/your-repo-name/" class="btn btn-primary" target="_blank">View Site</a>
-           <a href="https://github.com/KinkaidEMSI/your-repo-name" class="btn btn-secondary" target="_blank">Code</a>
-       </div>
-   </div>
-   ```
-   
-   For **Project 2** (Interactive App), add this inside `<div class="projects-grid" id="project2-grid">`:
-   ```html
-   <div class="project-card">
-       <h3>Your App Name</h3>
-       <p class="student-name">@your-github-username</p>
-       <p class="project-description">
-           Brief description of your interactive app (1-2 sentences).
-       </p>
-       <div class="project-links">
-           <a href="https://your-username.github.io/your-app-repo/" class="btn btn-primary" target="_blank">View App</a>
-           <a href="https://github.com/KinkaidEMSI/your-app-repo" class="btn btn-secondary" target="_blank">Code</a>
-       </div>
-   </div>
-   ```
+3. **Enable GitHub Pages:**
+   - Go to your repository on GitHub
+   - Click **Settings** (top right)
+   - Click **Pages** (left sidebar)
+   - Under "Branch", select **main** branch
+   - Click **Save**
+   - Wait 1-2 minutes for your site to build
 
-4. **Commit and push**
-   ```bash
-   git add index.html
-   git commit -m "Add my project to showcase"
-   git push origin main
-   ```
+4. **That's it!** Within a few hours, your project will automatically appear on the showcase page.
 
-5. **Create a Pull Request** on GitHub
+### How It Works
 
-### Option 2: Submit via Issue
+The showcase page runs an automatic script that:
+- Scans all student repositories in the KinkaidEMSI organization
+- Finds projects with GitHub Pages enabled
+- Displays them automatically
 
-Create an issue with your project information:
-- Project type (1 or 2)
-- Your name
-- GitHub username
-- Project GitHub Pages URL
-- Repository URL
-- Brief description
+**You don't need to:**
+- Fork anything
+- Create pull requests  
+- Edit any HTML
+- Fill out forms
+
+**You just need to:** Enable GitHub Pages on your project repository!
 
 ---
 
 ## 🛠️ For Instructors
 
-### Enable GitHub Pages
-1. Go to repository **Settings** > **Pages**
-2. Set **Source** to `main` branch, `/` (root)
-3. Save
+### Update the Showcase Manually
 
-### Review Student Submissions
-Check pull requests and merge approved projects.
+When you want to refresh the showcase with the latest student projects:
+
+```bash
+# Clone the repo
+git clone https://github.com/KinkaidEMSI/vibecoding-student-showcase.git
+cd vibecoding-student-showcase
+
+# Run the update script
+python3 fetch-student-projects.py
+
+# Commit and push
+git add index.html
+git commit -m "Update student projects showcase"
+git push
+```
+
+The script automatically:
+- Fetches all student repos from the KinkaidEMSI org
+- Checks which ones have GitHub Pages enabled
+- Generates an updated index.html with all projects
+- Shows project counts and stats
+
+### Customize Project Matching
+
+Edit `fetch-student-projects.py` and modify the `get_student_repos()` function to change:
+- Project name patterns (currently: `project-1-personal-website` and `project-2`)
+- Which repos to include/exclude
+- How student names are extracted from repo names
+
+### Manual HTML Edits
+
+If you need to manually add/edit a project, edit `index.html` directly. Find the appropriate section (`project1-grid` or `project2-grid`) and add:
+
+```html
+<div class="project-card">
+    <h3>Student Name</h3>
+    <p class="student-name">@username</p>
+    <p class="project-description">
+        Brief project description.
+    </p>
+    <div class="project-links">
+        <a href="PAGES_URL" class="btn btn-primary" target="_blank">View Site</a>
+        <a href="REPO_URL" class="btn btn-secondary" target="_blank">Code</a>
+    </div>
+</div>
+```
 
 ---
 
-Built with 💜 for VibeCoding 2026
+## 📚 Links
+
+- **Showcase:** https://kinkaidemsi.github.io/vibecoding-student-showcase/
+- **Course Materials:** https://kinkaidemsi.github.io/vibecoding-2026-materials/docs/
+- **Repository:** https://github.com/KinkaidEMSI/vibecoding-student-showcase
+
+---
+
+Built with 💜 for VibeCoding 2026 at Kinkaid School
