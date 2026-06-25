@@ -6,24 +6,25 @@
         "name": "Nicole Chen",
         "description": "Personal website with portfolio and projects",
         "enabled": true,
-        "repo": "NIcolechen977/project-1-personal-website",
-        "pages_url": "https://nicolethen977.github.io/project-1-personal-website/"
+        "repo": "NIcolechen977/project1",
+        "pages_url": "https://nicolechen977.github.io/project1/"
       },
       {
         "username": "Mezu-Uwalaka",
         "name": "Mezu Uwalaka",
         "description": "Personal website highlighting interests",
         "enabled": true,
-        "repo": "Mezu-Uwalaka/project-1-personal-website",
-        "pages_url": "https://mezu-uwalaka.github.io/project-1-personal-website/"
+        "repo": "Mezu-Uwalaka/FinalWebsite",
+        "pages_url": "https://mezu-uwalaka.github.io/FinalWebsite/"
       },
       {
         "username": "Bryan-6",
         "name": "Bryan",
         "description": "Personal website with creative design",
-        "enabled": true,
-        "repo": "Bryan-6/project-1-personal-website",
-        "pages_url": "https://bryan-6.github.io/project-1-personal-website/"
+        "enabled": false,
+        "repo": "Bryan-6/Final-Website",
+        "pages_url": "",
+        "note": "Pages not enabled yet"
       },
       {
         "username": "GTran21",
