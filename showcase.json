@@ -2,27 +2,9 @@
   "projects": {
     "project1": [
       {
-        "username": "vladimirlopezstudent",
-        "name": "Vladimir Lopez",
-        "description": "Personal website showcasing interests and skills",
-        "enabled": true
-      },
-      {
-        "username": "pavangud",
-        "name": "Pavan",
-        "description": "Creative personal website with interactive elements",
-        "enabled": true
-      },
-      {
         "username": "NIcolechen977",
         "name": "Nicole Chen",
         "description": "Personal website with portfolio and projects",
-        "enabled": true
-      },
-      {
-        "username": "audreyisprocoder",
-        "name": "Audrey",
-        "description": "Personal website with coding projects showcase",
         "enabled": true
       },
       {
