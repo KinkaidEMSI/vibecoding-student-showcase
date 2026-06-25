@@ -188,8 +188,13 @@ def generate_project_cards(projects: List[Dict], project_num: int) -> str:
         if not project.get('enabled', True):
             continue
         
-        # Get current URLs from GitHub
-        pages_url, repo_url = get_project_url(project['username'], project_num)
+        # Use direct URLs from showcase.json if available, otherwise query GitHub
+        if 'pages_url' in project and 'repo' in project:
+            pages_url = project['pages_url']
+            repo_url = f"https://github.com/{project['repo']}"
+        else:
+            # Get current URLs from GitHub
+            pages_url, repo_url = get_project_url(project['username'], project_num)
         
         if not pages_url:
             print(f"  ⚠️  Warning: No GitHub Pages found for {project['name']} (@{project['username']})")

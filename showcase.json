@@ -5,21 +5,76 @@
         "username": "NIcolechen977",
         "name": "Nicole Chen",
         "description": "Personal website with portfolio and projects",
-        "enabled": true
+        "enabled": true,
+        "repo": "NIcolechen977/project-1-personal-website",
+        "pages_url": "https://nicolethen977.github.io/project-1-personal-website/"
       },
       {
         "username": "Mezu-Uwalaka",
         "name": "Mezu Uwalaka",
         "description": "Personal website highlighting interests",
-        "enabled": true
+        "enabled": true,
+        "repo": "Mezu-Uwalaka/project-1-personal-website",
+        "pages_url": "https://mezu-uwalaka.github.io/project-1-personal-website/"
       },
       {
         "username": "Bryan-6",
         "name": "Bryan",
         "description": "Personal website with creative design",
-        "enabled": true
+        "enabled": true,
+        "repo": "Bryan-6/project-1-personal-website",
+        "pages_url": "https://bryan-6.github.io/project-1-personal-website/"
+      },
+      {
+        "username": "GTran21",
+        "name": "G Tran",
+        "description": "Interactive personal website project",
+        "enabled": true,
+        "repo": "GTran21/Emsiproject1",
+        "pages_url": "https://gtran21.github.io/Emsiproject1/"
+      },
+      {
+        "username": "NaimaBeye",
+        "name": "Naima Beye",
+        "description": "Creative personal website",
+        "enabled": true,
+        "repo": "NaimaBeye/my-website",
+        "pages_url": "https://naimabeye.github.io/my-website/"
+      },
+      {
+        "username": "Francisco-mrtnz",
+        "name": "Francisco",
+        "description": "Personal portfolio website",
+        "enabled": true,
+        "repo": "Francisco-mrtnz/Francisco",
+        "pages_url": "https://francisco-mrtnz.github.io/Francisco/"
+      },
+      {
+        "username": "Emika-C",
+        "name": "Emika",
+        "description": "Personal website project",
+        "enabled": true,
+        "repo": "Emika-C/Project-1",
+        "pages_url": "https://emika-c.github.io/Project-1/"
+      },
+      {
+        "username": "ajarkyn",
+        "name": "Ajarkyn",
+        "description": "Creative personal website",
+        "enabled": true,
+        "repo": "ajarkyn/personal-website",
+        "pages_url": "https://ajarkyn.github.io/personal-website/"
       }
     ],
-    "project2": []
+    "project2": [
+      {
+        "username": "HanISmart",
+        "name": "Han",
+        "description": "Brawl - Interactive game project",
+        "enabled": true,
+        "repo": "HanISmart/Brawl",
+        "pages_url": "https://hanismart.github.io/Brawl/"
+      }
+    ]
   }
 }
