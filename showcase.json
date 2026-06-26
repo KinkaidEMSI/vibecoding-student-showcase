@@ -64,6 +64,14 @@
         "enabled": true,
         "repo": "najmas67/Project-1",
         "pages_url": "https://najmas67.github.io/Project-1/"
+      },
+      {
+        "username": "ramc2026",
+        "name": "Ram",
+        "description": "Personal portfolio website",
+        "enabled": true,
+        "repo": "ramc2026/Project1-V2",
+        "pages_url": "https://ramc2026.github.io/Project1-V2/"
       }
     ],
     "project2": [
@@ -122,6 +130,30 @@
         "enabled": true,
         "repo": "C-Emika/Project-2.2",
         "pages_url": "https://c-emika.github.io/Project-2.2/"
+      },
+      {
+        "username": "AmelieOmelet",
+        "name": "Amelie",
+        "description": "Interactive web application",
+        "enabled": true,
+        "repo": "AmelieOmelet/Project-2",
+        "pages_url": "https://amelieomelet.github.io/Project-2/"
+      },
+      {
+        "username": "aurorabravo-ai",
+        "name": "Aurora",
+        "description": "Tetris - Classic game implementation",
+        "enabled": true,
+        "repo": "aurorabravo-ai/Tetris",
+        "pages_url": "https://aurorabravo-ai.github.io/Tetris/"
+      },
+      {
+        "username": "smpwell",
+        "name": "Samuel",
+        "description": "Interactive web project",
+        "enabled": true,
+        "repo": "EMSI-Vibe-Coding/Samuel-Fernandes",
+        "pages_url": "https://emsi-vibe-coding.github.io/Samuel-Fernandes/"
       }
     ]
   }
