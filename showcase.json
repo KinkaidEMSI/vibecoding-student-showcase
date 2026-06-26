@@ -148,6 +148,14 @@
         "pages_url": "https://aurorabravo-ai.github.io/Tetris/"
       },
       {
+        "username": "ramc2026",
+        "name": "Ram",
+        "description": "Interactive application project",
+        "enabled": true,
+        "repo": "ramc2026/Project_2_V1",
+        "pages_url": "https://ramc2026.github.io/Project_2_V1/"
+      },
+      {
         "username": "smpwell",
         "name": "Samuel",
         "description": "Interactive web project",
