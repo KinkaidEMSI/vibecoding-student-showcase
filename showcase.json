@@ -162,6 +162,14 @@
         "enabled": true,
         "repo": "EMSI-Vibe-Coding/Samuel-Fernandes",
         "pages_url": "https://emsi-vibe-coding.github.io/Samuel-Fernandes/"
+      },
+      {
+        "username": "smpwell",
+        "name": "Samuel",
+        "description": "Maze Warfare - Interactive game",
+        "enabled": true,
+        "repo": "smpwell/Maze-Warfare",
+        "pages_url": "https://smpwell.github.io/Maze-Warfare/"
       }
     ]
   }
