@@ -72,6 +72,22 @@
         "enabled": true,
         "repo": "ramc2026/Project1-V2",
         "pages_url": "https://ramc2026.github.io/Project1-V2/"
+      },
+      {
+        "username": "DiegoMV77",
+        "name": "Diego",
+        "description": "Personal website portfolio",
+        "enabled": true,
+        "repo": "DiegoMV77/Project-1-Personal-Website",
+        "pages_url": "https://diegomv77.github.io/Project-1-Personal-Website/"
+      },
+      {
+        "username": "aurorabravo-ai",
+        "name": "Aurora",
+        "description": "Personal website project",
+        "enabled": true,
+        "repo": "aurorabravo-ai/Project-1",
+        "pages_url": "https://aurorabravo-ai.github.io/Project-1/"
       }
     ],
     "project2": [
@@ -170,6 +186,22 @@
         "enabled": true,
         "repo": "smpwell/Maze-Warfare",
         "pages_url": "https://smpwell.github.io/Maze-Warfare/"
+      },
+      {
+        "username": "DiegoMV77",
+        "name": "Diego",
+        "description": "The Rabbit Game - Interactive adventure",
+        "enabled": true,
+        "repo": "DiegoMV77/Project-2-The-Rabbit-Game",
+        "pages_url": "https://diegomv77.github.io/Project-2-The-Rabbit-Game/"
+      },
+      {
+        "username": "GSBlackthorn",
+        "name": "GS Blackthorn",
+        "description": "Interactive web game",
+        "enabled": true,
+        "repo": "GSBlackthorn/Game-web-1",
+        "pages_url": "https://gsblackthorn.github.io/Game-web-1/"
       }
     ]
   }
