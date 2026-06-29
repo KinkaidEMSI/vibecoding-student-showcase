@@ -202,6 +202,22 @@
         "enabled": true,
         "repo": "GSBlackthorn/Game-web-1",
         "pages_url": "https://gsblackthorn.github.io/Game-web-1/"
+      },
+      {
+        "username": "Mezu-Uwalaka",
+        "name": "Mezu Uwalaka",
+        "description": "Neon Geometry Dash - fast-paced runner game",
+        "enabled": false,
+        "repo": "Mezu-Uwalaka/Final-Interactive-Game",
+        "pages_url": "https://mezu-uwalaka.github.io/Final-Interactive-Game/"
+      },
+      {
+        "username": "ajarkyn",
+        "name": "Ajarkyn",
+        "description": "Custom Flappy - customizable Flappy Bird game with themes",
+        "enabled": false,
+        "repo": "ajarkyn/custom-flappy",
+        "pages_url": "https://ajarkyn.github.io/custom-flappy/"
       }
     ]
   }
